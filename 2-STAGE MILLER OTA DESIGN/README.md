@@ -20,7 +20,7 @@ A two-stage Miller-compensated operational transconductance amplifier (OTA) desi
 | Slew Rate | 20 V/µs | 20.35 V/µs |
 | Cc | 1 pF | 1 pF |
 | CL | 1 pF | 1 pF |
-| ICMR | 0.6–1.0 V | — |
+| ICMR | 0.6–1.0 V | 0.6~10V |
 | CMRR | — | 57.75 dB |
 ---
 
