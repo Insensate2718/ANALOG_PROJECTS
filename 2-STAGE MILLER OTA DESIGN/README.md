@@ -18,7 +18,7 @@ A two-stage Miller-compensated operational transconductance amplifier (OTA) desi
 | Phase Margin | ~60° | 56.8° |
 | GBW | 30 MHz | 17 MHz |
 | Slew Rate | 20 V/µs | 20.35 V/µs |
-| Cc | 1 pF | 1 pF |
+| Cc | 0.44 pF | 1 pF |
 | CL | 1 pF | 1 pF |
 | ICMR | 0.6–1.0 V | 0.6~1.0V |
 | CMRR | — | 57.75 dB |
@@ -81,7 +81,7 @@ The design followed a **gm/ID-based sizing flow**, rather than direct square-law
 
 ---
 
-## 5. Key Design Equations
+## 5. Key Design Equations and constraints
 
 
 **DC Gain**
@@ -113,6 +113,53 @@ $$SR = \frac{I_{M5}}{C_c}$$
 **Compensation Rule of Thumb**
 
 $$C_c \gtrsim 0.22 \cdot C_L$$
+
+
+## Constraints
+
+### 4.1 Symmetry of the Differential Pair (M1, M2)
+
+
+$$(W/L)M1 = (W/L)M2$$
+
+M1 and M2 must be perfectly matched in W, L, number of fingers, and orientation. Any mismatch creates a systematic input-referred offset voltage.
+
+### 4.2 Additionally, the drain voltages of M3 and M4 must be equal at the quiescent operating point
+
+$$
+V_{D,M3} = V_{D,M4}
+$$
+
+This is satisfied automatically when the circuit is fully symmetric (balanced differential input), but it must be verified in the DC operating-point analysis. If these voltages are unequal, M4 will be operating at a different point on its I–V characteristic than M3 despite matched W/L — causing a channel-length modulation error in the mirrored current. A cascode mirror (if area/headroom permits) would further suppress this sensitivity.
+
+
+
+### 4.3 Output Resistance of Current Sources (M0, M5, M10)
+
+Tail current source M5 and stage-2 sink M10 must present a large output resistance to:
+
+- maximise the first-stage output resistance (Rout1 ∝ ro2 ∥ ro4 — NMOS side contributes ro of M2 and M5 in series, both matter)
+- minimise PSRR degradation
+- ensure the bias mirror (M0→M5 and M0→M10) delivers a current that is insensitive to drain-voltage variation
+
+This is achieved by using long channel lengths for all current-source/sink devices (M0, M5, M10 use L ≥ 2 µm in this design, vs. L = 1 µm for the signal-path devices):
+
+$$
+r_o = \frac{1}{\lambda I_D}
+\propto L
+\qquad
+\text{(longer L → smaller } \lambda \text{ → larger } r_o \text{)}
+$$
+
+A minimum guideline for the current sources is:
+
+$$r_{o,M5},\; r_{o,M10}\gg\frac{1}{g_{m(1,2)}}$$
+
+so that the tail degeneration does not degrade differential-mode gain. For the stage-2 sink M10, a high \(r_o\) is also required to maximise
+
+$$A_{v2}=g_{m7}\left(r_{o7}\parallel r_{o10}\right)$$
+
+
 
 ---
 
