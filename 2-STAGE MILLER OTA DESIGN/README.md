@@ -4,25 +4,24 @@ A two-stage Miller-compensated operational transconductance amplifier (OTA) desi
 
 ---
 
-## 1. Target Specifications
+## Target Specifications
+
+**Technology:** TSMC 65nm CMOS
+
+**Topology:** Two-stage Miller-compensated OTA
 
 | Parameter | Target | Simulated |
-|---|---|---|---|
-| Technology | TSMC 65nm CMOS | 
-| Topology | Two-stage Miller-compensated OTA | 
-| Supply Voltage (VDD) | 1.2V | 1.2 V| 
-| Bias Current (Ibias) | 20 µA | 20 µA (DC current source, testbench) | 
-| DC Gain (Av) | 50 dB | **56.20 dB** (AC sim) | 
-| Phase Margin (PM) | ~60° | **≈56.8°** | 
-| Gain-Bandwidth  (GBW) | 30MHz | 17MHz |
-| Slew Rate (SR) | 20 V/µs | 20.35 V/µs  |
-| Compensation Cap (Cc) | 1 pF | 1pF | 
-| Load Capacitance (CL) | 1 pF | 1pF |
-| Input Common-Mode Range (ICMR) | 0.6 V – 1.0 V | — |
-| Common Mode Rejection Ratio | — | 57.75 dB |
-
-
-
+|-----------|--------|-----------|
+| VDD | 1.2 V | 1.2 V |
+| Ibias | 20 µA | 20 µA |
+| DC Gain | 50 dB | 56.20 dB |
+| Phase Margin | ~60° | 56.8° |
+| GBW | 30 MHz | 17 MHz |
+| Slew Rate | 20 V/µs | 20.35 V/µs |
+| Cc | 1 pF | 1 pF |
+| CL | 1 pF | 1 pF |
+| ICMR | 0.6–1.0 V | — |
+| CMRR | — | 57.75 dB |
 ---
 
 ## 2. Topology
